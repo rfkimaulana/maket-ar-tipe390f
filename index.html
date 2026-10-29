@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maket AR Tipe 390 F</title>
+<meta name="description" content="Maket interior AR Hunian Vertikal Negara Tipe 390 F, per ruang.">
+<meta name="theme-color" content="#1c1a17">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c1a17'/%3E%3Cpath d='M7 23V12l9-5 9 5v11h-6v-6h-6v6z' fill='%23c8935a'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.4.0/dist/model-viewer.min.js"></script>
+<style>
+  :root {
+    --bg: #1c1a17;
+    --panel: #26231f;
+    --line: #3a352f;
+    --text: #f3eee6;
+    --muted: #b3a998;
+    --accent: #c8935a;
+    --accent-ink: #1c1a17;
+    --stage: radial-gradient(120% 90% at 50% 35%, #34302a 0%, #1c1a17 70%);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--text);
+    font: 15px/1.45 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    display: flex; flex-direction: column; min-height: 100dvh;
+    -webkit-tap-highlight-color: transparent;
+  }
+  header { padding: 18px 16px 10px; padding-top: max(18px, env(safe-area-inset-top)); }
+  .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  h1 { font: 600 22px/1.2 Fraunces, Georgia, serif; margin: 4px 0 0; }
+
+  nav { display: flex; gap: 8px; overflow-x: auto; padding: 8px 16px 12px; scrollbar-width: none; scroll-snap-type: x proximity; }
+  nav::-webkit-scrollbar { display: none; }
+  nav button {
+    flex: 0 0 auto; scroll-snap-align: start;
+    border: 1px solid var(--line); background: var(--panel); color: var(--text);
+    border-radius: 999px; padding: 9px 14px; font: 500 14px Inter, sans-serif; cursor: pointer;
+  }
+  nav button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+
+  main { position: relative; flex: 1; min-height: 58dvh; background: var(--stage); }
+  model-viewer { width: 100%; height: 100%; position: absolute; inset: 0; --poster-color: transparent; }
+  .bar { position: absolute; left: 0; right: 0; top: 0; height: 3px; background: transparent; }
+  .bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+  .views { position: absolute; top: 12px; right: 12px; display: flex; gap: 6px; }
+  .views button {
+    border: 1px solid var(--line); background: rgba(38,35,31,.85); color: var(--text);
+    border-radius: 8px; padding: 7px 10px; font: 500 12px Inter, sans-serif; cursor: pointer;
+  }
+  #arBtn {
+    position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%);
+    border: 0; border-radius: 999px; padding: 14px 22px; white-space: nowrap;
+    background: var(--accent); color: var(--accent-ink); font: 600 15px Inter, sans-serif;
+    box-shadow: 0 6px 24px rgba(0,0,0,.35); cursor: pointer;
+  }
+  .noar { position: absolute; left: 16px; right: 16px; bottom: 18px; text-align: center; font-size: 13px; color: var(--muted); }
+
+  footer { padding: 14px 16px; padding-bottom: max(14px, env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--panel); }
+  .room { font: 600 17px/1.3 Fraunces, Georgia, serif; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 2px; }
+  .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; font-size: 13px; }
+  .tips div { border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; color: var(--muted); }
+  .tips b { color: var(--text); font-weight: 600; display: block; }
+  .credit { margin-top: 12px; font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">Hunian Vertikal Negara · IKN</div>
+  <h1>Maket Interior Tipe 390 F</h1>
+</header>
+
+<nav id="menu" aria-label="Pilih ruang"></nav>
+
+<main>
+  <model-viewer id="mv" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" ar-placement="floor"
+    camera-controls touch-action="pan-y" shadow-intensity="1" shadow-softness="0.8" exposure="1.05"
+    environment-image="neutral" camera-orbit="25deg 40deg auto" interaction-prompt="auto"
+    alt="Maket 3D ruang">
+    <div class="bar" slot="progress-bar"><i id="prog"></i></div>
+    <button id="arBtn" slot="ar-button">Lihat di AR</button>
+    <div class="noar" id="noar" hidden>Buka halaman ini di HP (Android atau iPhone) untuk mode AR.</div>
+  </model-viewer>
+  <div class="views">
+    <button id="vTop" type="button">Tampak atas</button>
+    <button id="vIso" type="button">Perspektif</button>
+  </div>
+</main>
+
+<footer>
+  <div class="room" id="roomName"></div>
+  <div class="meta" id="roomMeta"></div>
+  <div class="tips">
+    <div><b>Cubit 2 jari</b>perbesar / perkecil</div>
+    <div><b>Putar 2 jari</b>rotasi maket</div>
+  </div>
+  <div class="credit">Maket disederhanakan untuk tampilan AR; detail perabot dapat berbeda dari desain akhir.</div>
+</footer>
+
+<script>
+// Data ruang: diisi oleh scripts/ar2_site.py dari laporan validation/ar1/*.json
+const ROOMS = /*ROOMS*/[{"id": "living", "short": "Living", "name": "Living, Dining & Pantry", "glb": "models/R07_LIVING.glb", "usdz": "models/R07_LIVING.usdz", "scale": "1:40", "cm": [39.8, 58.1], "m": [15.92, 23.23]}, {"id": "kitchen", "short": "Kitchen Service", "name": "Kitchen Service", "glb": "models/R02_KITCHEN.glb", "usdz": "models/R02_KITCHEN.usdz", "scale": "1:20", "cm": [36.9, 24.4], "m": [7.39, 4.89]}, {"id": "foyer", "short": "Foyer", "name": "Foyer", "glb": "models/R01_FOYER.glb", "usdz": "models/R01_FOYER.usdz", "scale": "1:20", "cm": [22.3, 23.6], "m": [4.45, 4.72]}, {"id": "master-suite", "short": "Master Suite", "name": "Master Suite (Bedroom + Bathroom)", "glb": "models/SUITE_R03R04.glb", "usdz": "models/SUITE_R03R04.usdz", "scale": "1:20", "cm": [43.5, 46.2], "m": [8.7, 9.25]}, {"id": "kids-bedroom", "short": "Kids Bedroom", "name": "Kids Bedroom", "glb": "models/R05_KBED.glb", "usdz": "models/R05_KBED.usdz", "scale": "1:20", "cm": [41.7, 31.1], "m": [8.34, 6.23]}, {"id": "kids-bathroom", "short": "Kids Bathroom", "name": "Kids Bathroom", "glb": "models/R06_KBATH.glb", "usdz": "models/R06_KBATH.usdz", "scale": "1:20", "cm": [14.6, 10.2], "m": [2.93, 2.03]}]/*END*/;
+
+const mv = document.getElementById('mv');
+const menu = document.getElementById('menu');
+const prog = document.getElementById('prog');
+
+function show(i) {
+  const r = ROOMS[i];
+  mv.src = r.glb;
+  mv.iosSrc = r.usdz;
+  mv.cameraOrbit = '25deg 40deg auto';
+  document.getElementById('roomName').textContent = r.name;
+  document.getElementById('roomMeta').textContent =
+    `Skala awal ${r.scale} · maket ±${r.cm[0]} × ${r.cm[1]} cm · ukuran ruang ±${r.m[0]} × ${r.m[1]} m`;
+  [...menu.children].forEach((b, j) => b.setAttribute('aria-pressed', String(i === j)));
+  history.replaceState(null, '', '#' + r.id);
+}
+
+ROOMS.forEach((r, i) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.textContent = r.short;
+  b.addEventListener('click', () => show(i));
+  menu.appendChild(b);
+});
+
+mv.addEventListener('progress', e => {
+  const p = e.detail.totalProgress;
+  prog.style.width = (p * 100) + '%';
+  prog.style.opacity = p >= 1 ? 0 : 1;
+});
+mv.addEventListener('load', () => {
+  if (!mv.canActivateAR) document.getElementById('noar').hidden = false;
+});
+document.getElementById('vTop').addEventListener('click', () => { mv.cameraOrbit = '0deg 0deg auto'; });
+document.getElementById('vIso').addEventListener('click', () => { mv.cameraOrbit = '25deg 40deg auto'; });
+
+const start = Math.max(0, ROOMS.findIndex(r => '#' + r.id === location.hash));
+show(start);
+</script>
+</body>
+</html>
